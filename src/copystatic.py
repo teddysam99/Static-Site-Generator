@@ -20,16 +20,16 @@ def recur_copy(src, dst):
             os.mkdir(dst_path)
             recur_copy(src_path,dst_path)
 
-def generate_pages_recursive(dir_path_content,template_path, dest_dir_path):
+def generate_pages_recursive(dir_path_content,template_path, dest_dir_path,base_path):
     for item in os.listdir(dir_path_content):
         from_path = os.path.join(dir_path_content, item)
         dest_path = os.path.join(dest_dir_path, item)
         if not os.path.isfile(from_path):
-            generate_pages_recursive(from_path,template_path,dest_path)
+            generate_pages_recursive(from_path,template_path,dest_path,base_path)
         else:
             if pathlib.Path(from_path).suffix == ".md":
                 dest_path = pathlib.Path(dest_path).with_suffix(".html")
-                generate_page(from_path,template_path,dest_path)
+                generate_page(from_path,template_path,dest_path,base_path)
 
 
 
