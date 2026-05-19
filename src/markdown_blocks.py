@@ -130,3 +130,11 @@ def olist_to_html_node(block):
         html_items.append(ParentNode("li", children))
     return ParentNode("ol", html_items)
 
+
+def extract_title(markdown):
+    lines = markdown.split("\n")
+    for line in lines:
+        line = line.strip()
+        if line.startswith("# "):
+            return line[2:].strip()
+    raise Exception("incorrect header")
